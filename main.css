@@ -1,0 +1,31 @@
+main {
+    width: 800px;
+    margin: 0 auto;
+    font-family: 'Montserrat', sans-serif;
+    min-height: 400px;
+}
+header {
+    margin: 1em auto;
+    border-bottom: 1px solid black;
+}
+header img {
+    margin-right: 2em;
+}
+header span {
+    display: inline-block;
+}
+footer {
+	margin: 2em auto 10px auto;
+	border-top: 1px solid black;
+	padding: 10px;
+	text-align: center;	
+}
+a.logo {
+	text-decoration: none;
+	font-family: 'Monoton', cursive;
+	font-size: 18px;
+}
+
+a.logo:hover {
+	text-decoration: none;
+}
