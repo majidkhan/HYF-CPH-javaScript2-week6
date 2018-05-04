@@ -1,5 +1,5 @@
 main {
-    width: 800px;
+    width: 900px;
     margin: 0 auto;
     font-family: 'Montserrat', sans-serif;
     min-height: 400px;
@@ -28,4 +28,14 @@ a.logo {
 
 a.logo:hover {
 	text-decoration: none;
+}
+
+@media all and (max-width: 899px) {
+    main {
+        width: 100%;
+        padding: 0 15px;
+    }
+    col {
+        width: 100%;
+    }
 }

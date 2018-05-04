@@ -67,7 +67,7 @@ function renderContributors(cList) {
     const contributors = document.querySelector('#contributors');
     contributors.innerHTML = "";
     contributors.setAttribute('class','list-group list-group-flush');
-    console.log("RCB ", cList);
+    console.log("Contributors ", cList);
     cList.forEach( function(cItem) {
         const li = document.createElement('li');
         li.setAttribute('class','list-group-item');
@@ -83,10 +83,8 @@ function renderContributors(cList) {
     });
 }
 
-/*  validateJSONData().
-
+/*  getItemsInData().
     This function gets JSON data returned by fetchJSONData() as an argument and return only items[] out of the array
-
 */
 
 function getItemsInData(searchData) {
@@ -103,15 +101,12 @@ function getItemsInData(searchData) {
 
 
 /*  validateJSONData()
-
     This function show error message to user if no record is found against the searched query
-
 */
 
 function validateJSONData(ValData) {
     console.log("ValData Length", ValData);
     if(ValData.total_count === 0) {
-//        const errorMessage = '<li class="text-danger">No repository was found for this search term.</li>';
         const errorMessage = '<div class="alert alert-danger" role="alert">No repository was found for this search term.</div>';
         container.innerHTML = errorMessage;
 
