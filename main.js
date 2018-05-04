@@ -20,14 +20,25 @@ function getRepoNames( data ) {
         anLi.innerHTML = `<a class="repo-detail" href="${item.url}" target="_blank">${item.name}</a>`;
         anLi.addEventListener('click', function(linkLi) {
             linkLi.preventDefault();
+            getRepoTitle(item);
             getContributors(item);
         });
         container.appendChild(anLi); 
     });
-    btn.innerHTML = "JSON data loaded";
 }
 
+/*
+    GetRepoTitle prints repo name and insert it in Contributors column as a repo title
+*/
+function getRepoTitle(repo) {
+    const repoName = document.querySelector("#repo-name");
+    repoName.innerHTML = repo.name;
+    document.querySelector("#title-contrib").innerHTML = "Contributors";
+}
 
+/*
+    GetContributors call fetchJSONData() to fetch all contributors of the selected repo
+*/
 function getContributors(link) {
     const contributorsLink = link.url + '/contributors'
     fetchJSONData(contributorsLink, function(contributorsList) {
@@ -35,29 +46,39 @@ function getContributors(link) {
     });
 }
 
-function renderContributors(rcb) {
+// set attributes of <a>
+function fixA(elem, target, href ) {
+    elem.setAttribute('target','_blank');
+    elem.setAttribute('href', href);
+}
+
+// set attributes of <img>
+function fixImg(elem, src, elemClass, width, title) {
+    elem.setAttribute('src', src);
+    elem.setAttribute('class', elemClass);
+    elem.setAttribute('width', width);
+    elem.setAttribute('title', title);
+}
+
+/*
+    RenderContributors prints all contributors of the selected repo
+*/
+function renderContributors(cList) {
     const contributors = document.querySelector('#contributors');
     contributors.innerHTML = "";
     contributors.setAttribute('class','list-group list-group-flush');
-    const h2 = document.createElement('h2');
-    const textH2 = document.createTextNode('Contributors');
-    h2.appendChild(textH2);
-    h2.setAttribute('class', 'mt-3');
-    contributors.before(h2);
-    console.log("RCB ", rcb);
-    rcb.forEach( function(item) {
+    console.log("RCB ", cList);
+    cList.forEach( function(cItem) {
         const li = document.createElement('li');
         li.setAttribute('class','list-group-item');
         const conImg = document.createElement('img');
-        conImg.src = item.avatar_url;
-        conImg.setAttribute('class','rounded mr-3');
-        conImg.setAttribute('width','75px');
-        conImg.setAttribute('title',item.login);
-        const span = document.createElement('span');
-        const contribName = document.createTextNode(item.login);
-        span.appendChild(contribName);
+        fixImg(conImg, cItem.avatar_url, 'rounded mr-3', '75px', cItem.login);
+        const a = document.createElement('a');
+        fixA(a,"_blank", cItem.html_url);
+        const contribName = document.createTextNode(cItem.login);
+        a.appendChild(contribName);
         li.appendChild(conImg);
-        li.appendChild(span);
+        li.appendChild(a);
         contributors.appendChild(li);
     });
 }
