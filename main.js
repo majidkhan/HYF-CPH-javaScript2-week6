@@ -83,20 +83,6 @@ function renderContributors(cList) {
     });
 }
 
-/*  getItemsInData().
-    This function gets JSON data returned by fetchJSONData() as an argument and return only items[] out of the array
-*/
-
-function getItemsInData(searchData) {
-    let output = "";
-    for (let items in searchData) {
-        output += searchData.items;
-    }
-    return output; 
-}
-
-
-
 
 
 
@@ -111,9 +97,8 @@ function validateJSONData(ValData) {
         container.innerHTML = errorMessage;
 
     } else {
-        const searchedData = ValData.items.filter(getItemsInData);
-        getRepoNames(searchedData);
-        console.log("JSON DATA ", searchedData);
+        getRepoNames(ValData.items);
+        console.log("JSON DATA Valdata ", ValData.items);
     };
 }
 
